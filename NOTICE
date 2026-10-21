@@ -1,18 +1,23 @@
-fastMD contains namespaced inference code from the following sources:
-- MatRIS: optimized reb/third_party/matris-09bk snapshot plus five supplied fixes;
-  BSD-3-Clause (licenses/matris.txt). NVIDIA-authored files carrying Apache-2.0
-  SPDX notices retain those notices; see licenses/apache-2.0.txt.
-- CHGNet (origin/CHGNet_CG): see licenses/chgnet.txt.
-- ALIGNN (origin/ALIGNN_CG): see licenses/alignn.txt.
-- MACE optimizations: reb/mace_opt from reb_package_20260927, targeting
-  mace-torch 0.3.16. The supplied mace_opt directory has no standalone license.
-  This code is not relicensed by fastMD's root LICENSE. Upstream MACE's MIT
-  attribution is retained in licenses/mace.txt; upstream MACE is a dependency.
+FastMD source and third-party notices
+====================================
 
-Exact source commits, patch hashes, migrated paths, and local changes are recorded
-in docs/sources.json. Original file-level copyright and license notices apply.
-CHGNet 0.3.0 pretrained weights are retained from the CHGNet branch. Other weights
-are supplied by the user or downloaded by their model's loader; model/data terms
-continue to apply. No MACE weights or benchmark datasets are bundled.
-The new fastMD interface code is distributed under BSD-3-Clause in LICENSE.
-TorchSim is an architectural reference, not a runtime dependency or vendored source.
+FastMD includes single-device code derived from the MD / MatRIS project.
+Copyright (c) 2025, HPC+AI Team. The BSD 3-Clause license is in LICENSE.
+The original source attribution and license notices are retained.
+
+Selected ORB adapters and inference rewrites in fastmd/models/orb.py,
+fastmd/models/orb_graph.py and fastmd/models/orb_ops/ are derived from
+orb-models 0.5.4 by Orbital Materials, Inc. The source comments identify
+the adapted routines and changes. Copyright 2024 Orbital Materials, Inc.
+These portions are licensed under Apache-2.0; see licenses/orb-Apache-2.0.txt.
+
+Selected eSEN rotation and inference routines and the MatRIS GaussianExpansion
+are adapted from fairchem. Copyright (c) Meta, Inc. and its affiliates.
+These portions are licensed under MIT; see licenses/fairchem-MIT.txt.
+
+SphericalExpansion in fastmd/models/matris/basis_function.py is adapted from
+MatterSim. Copyright (c) Microsoft Corporation.
+This portion is licensed under MIT; see licenses/mattersim-MIT.txt.
+
+Optional model packages and pretrained weights are provided separately by
+their respective projects and retain their own licenses.

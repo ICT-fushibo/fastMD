@@ -3,32 +3,37 @@ requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "fastmd-mlip"
-version = "0.2.0"
-description = "ASE-first MLIP inference with optional CUDA Graph acceleration"
+name = "fastmd"
+version = "0.1.0"
+description = "Single-device molecular simulation with multiple ML interatomic potentials"
 readme = "README.md"
-requires-python = ">=3.11"
-dependencies = ["ase>=3.23", "numpy>=1.26", "torch>=2.6"]
+requires-python = ">=3.10"
+license = {file = "LICENSE"}
+dependencies = ["ase>=3.23.0", "numpy>=2.0.0", "pymatgen>=2024.9.10", "torch>=2.6.0"]
 
 [project.optional-dependencies]
-matris = ["pymatgen>=2024.9.10"]
-mace = ["mace-torch==0.3.16", "e3nn==0.4.4"]
-chgnet = ["pymatgen>=2024.9.10", "typing-extensions>=4.5"]
-alignn = ["jarvis-tools>=2024.10.30", "dgl>=1.1,<2", "pydantic-settings>=2", "pandas", "matplotlib", "scikit-learn", "requests", "tqdm"]
-cuda = ["torch>=2.8", "warp-lang==1.10.0", "nvalchemi-toolkit-ops==0.2.0"]
-mace-cuda = ["mace-torch==0.3.16", "e3nn==0.4.4", "torch>=2.8", "triton>=3.4"]
-test = ["pytest>=8", "build"]
+# The current nvalchemiops torch API requires torch >= 2.8; the base CPU install keeps its own lower bound.
+gpu-graph = [
+    "torch>=2.8.0",
+    "nvalchemi-toolkit-ops[torch]>=0.4.1,<0.5",
+    "warp-lang>=1.13.0",
+]
+mace = ["mace-torch==0.3.16"]
+sevennet = ["sevenn==0.13.0"]
+orb = ["orb-models==0.5.4", "dm-tree==0.1.8", "cached-path==1.8.10"]
+chgnet = ["chgnet==0.4.2"]
+# Prophet uses an isolated benchmark environment and requires Python >= 3.11.
+prophet = ["prophet-mlip @ git+https://github.com/kairosmaterial/prophet.git@62bc2769fa83214fd564c7df263ee254e73fc6e9"]
+# Acceleration is separate from the model extras because these wheels require CUDA 13.
+cueq-cu13 = ["cuequivariance==0.9.1", "cuequivariance-torch==0.9.1", "cuequivariance-ops-torch-cu13==0.9.1"]
+m3gnet = ["matgl==4.0.3"]
 
-[tool.setuptools.packages.find]
-where = ["src"]
-
-[tool.setuptools.package-data]
-"fastmd._vendor.chgnet" = ["pretrained/0.3.0/*.pth.tar"]
-"fastmd._vendor.alignn" = ["ff/*.json"]
-
-[tool.pytest.ini_options]
-testpaths = ["tests"]
-markers = ["integration: runs real pretrained models", "cuda: requires NVIDIA CUDA"]
+[project.scripts]
+fastmd-explain = "fastmd.explain:main"
 
 [tool.setuptools]
 license-files = ["LICENSE", "NOTICE", "licenses/*.txt"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["fastmd*"]

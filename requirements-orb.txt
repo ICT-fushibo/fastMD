@@ -1,0 +1,52 @@
+# The optional ORB model family (fastmd.adapters.orb): orb-models 0.5.4 (ORB v3), plus the packages it imports that
+# a PyTorch environment lacks. Exact versions, each with the sha256 of its PyPI file.
+#
+# Platforms: the platform wheels are the Linux aarch64 ones (Grace CPUs, e.g. GB200): dm-tree (cp312) and
+# cryptography (cp311-abi3: CPython 3.11 and later, glibc 2.34 and later). The others are pure Python. An x86_64
+# environment needs its own hashes for those two files (PyPI has x86_64 wheels of both; a requirement may list
+# several --hash options).
+#
+# Install over an environment that already runs fastmd, in a virtual environment that sees its packages:
+#
+#   python -m venv --system-site-packages <venv>
+#   <venv>/bin/python -m pip install --no-deps --require-hashes -r requirements-orb.txt
+#
+# These pins come from MD's tools/ci/orb_lane.sh; that script is not shipped with FastMD.
+# Normal installation uses pyproject.toml: python -m pip install -e '.[gpu-graph,orb]'.
+# See README.md for the platform limits of this file.
+#
+# Deliberately not installed, the base environment provides them: torch, numpy, scipy, ase and tqdm (the versions
+# fastmd runs with stay in place), and the other dependencies of these packages: requests, filelock,
+# huggingface-hub, packaging, rich, python-dateutil, urllib3, cffi and protobuf. `pip check` still reports
+# google-crc32c, google-resumable-media, proto-plus, opentelemetry-api and pyasn1-modules as missing and cached-path's
+# rich < 14 as unmet: ORB imports, loads and runs without them.
+#
+# orb-models 0.5.4 pins dm-tree 0.1.8 and imports cached-path, its checkpoint downloader, at module level;
+# cached-path 1.8.10 imports its Google Cloud Storage and S3 clients when it is imported, so those are listed too.
+# The source MD adapter was validated on orb-models 0.5.4.
+# dm_tree-0.1.8-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl
+dm-tree==0.1.8 --hash=sha256:09964470f76a5201aff2e8f9b26842976de7889300676f927930f6285e256760
+# cached_path-1.8.10-py3-none-any.whl
+cached-path==1.8.10 --hash=sha256:a7a80c4a77859e40080ed3450bc1ca5434a74fc51566361677a75fd2f5b8fea8
+# google_cloud_storage-3.17.0-py3-none-any.whl
+google-cloud-storage==3.17.0 --hash=sha256:0b89283fccf84745bae75bbefdbda8393e5323471071a2ba24ab437407141171
+# google_cloud_core-2.8.0-py3-none-any.whl
+google-cloud-core==2.8.0 --hash=sha256:e235b0952f7ffe7b9c71a4cf96b506d9cfb557e22557c412f0df9b7068b5d007
+# google_api_core-2.42.0-py3-none-any.whl
+google-api-core==2.42.0 --hash=sha256:b1bdf4f72dc4f910736ce4ba49038352effbbc309579215107649b22973a1317
+# googleapis_common_protos-1.75.5-py3-none-any.whl
+googleapis-common-protos==1.75.5 --hash=sha256:d7285525c23039db98f2463e6d5a4f9b958b94d497f03a844ece3259c4e72d5d
+# google_auth-2.61.0-py3-none-any.whl
+google-auth==2.61.0 --hash=sha256:ca60266a37475ae68b63bac007272f46094b3d571abe92aded329b6cfb568025
+# cryptography-50.0.2-cp311-abi3-manylinux_2_34_aarch64.whl
+cryptography==50.0.2 --hash=sha256:87e9ce85beb6b328ba370cc6e6aea483c92617b4c95b1d33a49297eb662bfb04
+# boto3-1.43.111-py3-none-any.whl
+boto3==1.43.111 --hash=sha256:c79994619c8d89e45f6fd0edc5c5b5a70c9358f00423f4c99cb64931f89ecf37
+# botocore-1.43.111-py3-none-any.whl
+botocore==1.43.111 --hash=sha256:f1f4c28cb2a096bf246d0bb24cbb1a01c5cb696ef499fa71b155adda7b94c90b
+# s3transfer-0.19.2-py3-none-any.whl
+s3transfer==0.19.2 --hash=sha256:d8168eccca828cbb2cd573675333f3bddd254313a9c42494b84c76b539e8ba25
+# jmespath-1.1.0-py3-none-any.whl
+jmespath==1.1.0 --hash=sha256:a5663118de4908c91729bea0acadca56526eb2698e83de10cd116ae0f4e97c64
+# orb_models-0.5.4-py3-none-any.whl
+orb-models==0.5.4 --hash=sha256:af096f30c39cb11965aee792092b00b8cc350fd7dfbc13d53528f223f1953fe7

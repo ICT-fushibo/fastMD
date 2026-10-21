@@ -1,0 +1,29 @@
+# The optional CHGNet model family (fastmd.adapters.chgnet): chgnet 0.4.2, whose package includes the CHGNet 0.3.0
+# weights the adapter loads (sha256-checked at load). The exact version, with the sha256 of its PyPI file.
+#
+# PyPI has no Linux aarch64 wheel of chgnet 0.4.2, so the pin is its sdist (--no-binary=chgnet: the same file, and
+# hash, on every platform), built at install: its Cython extension chgnet.graph.cygraph (the fast graph converter)
+# against the base environment's Cython, numpy and setuptools (--no-build-isolation; a C compiler is needed).
+#
+# Install over an environment that already runs fastmd, in a virtual environment that sees its packages:
+#
+#   python -m venv --system-site-packages <venv>
+#   <venv>/bin/python -m pip install --no-deps --require-hashes --no-binary=chgnet --no-build-isolation \
+#       -r requirements-chgnet.txt
+#
+# then write the module nvidia_smi.py into the venv's site-packages, the one line
+#
+#   from pynvml import *  # noqa: F401,F403
+#
+# chgnet imports the legacy nvidia_smi module and declares nvidia-ml-py3 for it, a 2017 sdist whose own pynvml
+# module would replace nvidia-ml-py's; the shim provides nvidia_smi from the base environment's nvidia-ml-py instead.
+#
+# These pins and the shim recipe come from MD's tools/ci/chgnet_lane.sh, not shipped with FastMD.
+# Normal installation uses pyproject.toml: python -m pip install -e '.[gpu-graph,chgnet]'.
+# See README.md for the scope of this file; the recipe above is for the upstream pinned environment.
+#
+# Deliberately not installed, the base environment provides them: torch, numpy, ase and pymatgen (the versions
+# fastmd runs with stay in place), Cython and typing-extensions (chgnet's other dependencies), nvidia-ml-py (the
+# shim's pynvml), and setuptools for the build.
+# chgnet-0.4.2.tar.gz
+chgnet==0.4.2 --hash=sha256:a24dfa050f1eb6c51d46727029015c2b44aa1da22f11d5ffedc5b499c59e2088

@@ -1,7 +1,0 @@
-commit c5728925f0fe13503ad5aa081d2e4db3733040d5
-Author:     husiyu <littleyu192@163.com>
-AuthorDate: Mon Sep 28 10:46:14 2026 +0800
-Commit:     husiyu <littleyu192@163.com>
-CommitDate: Mon Sep 28 10:46:14 2026 +0800
-
-    Add MACE backend and update optimized MatRIS runtime for 0.2.0

@@ -1,4 +1,0 @@
-include NOTICE
-recursive-include licenses *.txt
-recursive-include docs *.md *.json
-recursive-include examples *.py

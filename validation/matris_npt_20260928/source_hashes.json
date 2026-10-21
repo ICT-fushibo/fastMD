@@ -1,9 +1,0 @@
-{
-  "src/fastmd/models/base.py": "488fafebc6306e45f9a5e9b4801f1c5572a92daaab13fdb373332d54cb565226",
-  "src/fastmd/models/matris.py": "0fb7f6548c54ae052c26817fc4ea3ba77768b7b54a955d95dd35c27e8f3da9aa",
-  "examples/validate_matris_npt.py": "63e35fea8ad1f162c055276f8df38a691738f857c50eb4f5001a00be2c7f2299",
-  "tests/test_matris_npt.py": "5f61ba274ad67c8d2947f1137ffa651310ea49c68c994339639859fafe555d87",
-  "validation/matris_npt_20260928/gpu_run.sh": "db93cf63ba8c11bdf11ce90d75f0adf4380f32cb0e31e1dec576462d6e3b06b9",
-  "validation/matris_npt_20260928/wait_and_run.sh": "efd78edf6fc7ae09837362dc3f546db9adeeacc0a387fe3782699098b7f17ef6",
-  "validation/matris_npt_20260928/diagnose_stress.py": "437d218ecd5fa9ad537fe3089ec61dcd4bcaa6888f1c1948a7c679b2722d1c93"
-}
